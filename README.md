@@ -1,3 +1,3 @@
-# Lyrics-Generator
+# LyricsGeneratator
 
 Generate Lyrics
