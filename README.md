@@ -1,4 +1,4 @@
-# LyricsGeneratator
+# LyricsGenerator
 
 Lyrics generator with genius.com scraper
 
