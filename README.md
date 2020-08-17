@@ -1,3 +1,3 @@
 # LyricsGeneratator
 
-Generate Lyrics
+Scrape lyrics from genius.com website.
