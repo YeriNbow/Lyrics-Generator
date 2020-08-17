@@ -3,7 +3,7 @@ import pymysql
 
 class ScrapeDB:
     """
-    Save data at MySQL Database
+    Save lyrics to MySQL Database
     """
     def __init__(self):
         self.con = pymysql.connect(host='127.0.0.1', user='root', password='******************',

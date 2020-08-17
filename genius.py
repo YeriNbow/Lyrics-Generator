@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 
 class GeniusScraper:
     """
-    Scrape lyrics from Genius website
+    Scrape lyrics from Genius website 
     """
 
     base_url = 'https://genius.com/artists/'
