@@ -6,7 +6,7 @@ class ScrapeDB:
     Save lyrics to MySQL Database
     """
     def __init__(self):
-        self.con = pymysql.connect(host='127.0.0.1', user='root', password='******************',
+        self.con = pymysql.connect(host='127.0.0.1', user='root', password='****************',
                                    db='testdb', cursorclass=pymysql.cursors.DictCursor)
         self.curs = self.con.cursor()
 
@@ -30,11 +30,21 @@ class ScrapeDB:
         self.curs.execute(sql, (artist, url, title, lyrics))
         self.con.commit()
 
-    def get_data(self):
+    def get_all_data(self):
         sql = '''
             SELECT *
             FROM scrape_tb
             '''
         self.curs.execute(sql)
+
+        return self.curs.fetchall()
+
+    def get_data(self, artist):
+        sql = '''
+            SELECT *
+            FROM scrape_tb
+            WHERE artist = %s
+            '''
+        self.curs.execute(sql, artist)
 
         return self.curs.fetchall()
