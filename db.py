@@ -5,9 +5,9 @@ class ScrapeDB:
     """
     Save lyrics to MySQL Database
     """
-    def __init__(self):
-        self.con = pymysql.connect(host='127.0.0.1', user='root', password='****************',
-                                   db='testdb', cursorclass=pymysql.cursors.DictCursor)
+    def __init__(self, user, password, db):
+        self.con = pymysql.connect(host='127.0.0.1', user=user, password=password,
+                                   db=db, cursorclass=pymysql.cursors.DictCursor)
         self.curs = self.con.cursor()
 
     def create_table(self):
@@ -17,7 +17,7 @@ class ScrapeDB:
                     Url varchar(200),
                     Title varchar(200),
                     Lyrics varchar(5000)
-                );
+                )
                 '''
         self.curs.execute(sql)
         self.con.commit()
@@ -48,3 +48,14 @@ class ScrapeDB:
         self.curs.execute(sql, artist)
 
         return self.curs.fetchall()
+
+    def get_artist_list(self):
+        sql = '''
+            SELECT DISTINCT artist
+            FROM scrape_tb
+            '''
+        self.curs.execute(sql)
+
+        artist_list = [result['artist'] for result in self.curs.fetchall()]
+
+        return artist_list
