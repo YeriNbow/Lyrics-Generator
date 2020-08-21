@@ -14,10 +14,9 @@ class GeniusScraper:
     Scrape lyrics from Genius website 
     """
 
-    BASE_URL = 'https://genius.com/artists/'
-
     WD_PATH = 'D:/IT/mywork/chromedriver.exe'
 
+    BASE_URL = 'https://genius.com/artists/'
     XPATH = '/html/body/routable-page/ng-outlet/routable-profile-page/ng-outlet/routed-page/profile-page/' \
             'div[3]/div[2]/artist-songs-and-albums/div[3]'
 
@@ -42,6 +41,7 @@ class GeniusScraper:
         current_len = len(driver.find_elements(*location))
 
         while True:
+            # scroll down
             driver.find_element(*location).send_keys(Keys.END)
             driver.implicitly_wait(5)
 
@@ -57,12 +57,12 @@ class GeniusScraper:
         return lyrics_urls
 
 
-def get_lyrics(lyrics_url):
-    response = requests.get(lyrics_url)
+def get_lyrics(url):
+    response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    lyrics1 = soup.find("div", class_="lyrics")
-    lyrics2 = soup.find("div", class_="Lyrics__Container-sc-1ynbvzw-2 jgQsqn")
+    lyrics1 = soup.find('div', class_='lyrics')
+    lyrics2 = soup.find('div', class_='Lyrics__Container-sc-1ynbvzw-2 jgQsqn')
 
     if lyrics1:
         return lyrics1.get_text()
