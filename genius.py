@@ -57,27 +57,20 @@ class GeniusScraper:
         return lyrics_urls
 
 
-def get_lyrics(url):
+def get_title_lyrics(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
+    regex = re.compile(r'– (.*?) Lyrics \| Genius Lyrics')
+    title = ''.join(regex.findall(soup.title.get_text()))
+
+    # sometimes web page structures are changing
     lyrics1 = soup.find('div', class_='lyrics')
     lyrics2 = soup.find('div', class_='Lyrics__Container-sc-1ynbvzw-2 jgQsqn')
 
     if lyrics1:
-        return lyrics1.get_text()
+        return title, lyrics1.get_text()
     elif lyrics2:
-        return lyrics2.get_text()
+        return title, lyrics2.get_text()
     elif lyrics1 and lyrics2 is None:
-        return None
-
-
-def get_title(url):
-    regex = re.compile(r'– (.*?) Lyrics \| Genius Lyrics')
-
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    title = ''.join(regex.findall(soup.title.get_text()))
-
-    return title
+        return title, None
