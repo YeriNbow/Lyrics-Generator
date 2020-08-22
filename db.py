@@ -16,7 +16,7 @@ class ScrapeDB:
                     Artist varchar(50),
                     Url varchar(200),
                     Title varchar(200),
-                    Lyrics varchar(5000)
+                    Lyrics varchar(10000)
                 )
                 '''
         self.curs.execute(sql)
