@@ -33,7 +33,6 @@ class LyricsGenerator:
     def generate_lyrics(self, model, input_string, num=1000, temp=0.5):
         new_lyrics = []
 
-        # 시작 문자열을 숫자로 변환(벡터화)
         vti_input = [self.vti[i] for i in input_string]
         vti_input = tf.expand_dims(vti_input, 0)
 
