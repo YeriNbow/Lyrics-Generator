@@ -74,3 +74,5 @@ def get_title_lyrics(url):
         return title, lyrics2.get_text()
     elif lyrics1 and lyrics2 is None:
         return title, None
+    else:
+        return None, None
