@@ -13,12 +13,12 @@ class LyricsGenerator:
         self.re_lyrics = re.sub(r'[^a-z0-9\'\!\?]', ' ', ly)
         self.vocab = sorted(set(self.re_lyrics))
 
-        self.n_chars = len(self.re_lyrics)
-        self.n_vocab = len(self.vocab)
+        self.n_chars = len(self.re_lyrics)  # number of characters in lyrics
+        self.n_vocab = len(self.vocab)  # number of vocabulary in lyrics
 
-        self.vti = {v: i for i, v in enumerate(self.vocab)}
-        self.itv = np.array(self.vocab)
-        self.idx_lyrics = np.array([self.vti[ly] for ly in self.re_lyrics])
+        self.vti = {v: i for i, v in enumerate(self.vocab)}  # vocab to index
+        self.itv = np.array(self.vocab)  # index to vocab
+        self.idx_lyrics = np.array([self.vti[ly] for ly in self.re_lyrics])  # indexed lyrics
 
     def model(self, embedding_dim, rnn_units, batch_size, dropout=0.2, activation='relu'):
         model = tf.keras.Sequential()
